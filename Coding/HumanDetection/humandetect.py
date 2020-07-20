@@ -17,7 +17,7 @@ while True:
 
     # draws the rectangles
     for (x, y, w, h) in face_coordinates:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (randrange(256), randrange(256), randrange(256)), 1)
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (randrange(256), randrange(256), randrange(256)), 10)
 
     cv2.imshow("box", frame)
     key = cv2.waitKey(1)
