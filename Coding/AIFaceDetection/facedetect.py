@@ -2,7 +2,8 @@ import cv2
 from random import randrange
 
 
-trained_face_data = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+trained_face_data = cv2.CascadeClassifier(
+    'haarcascade_frontalface_default.xml')
 
 #img = cv2.imread('download.jpg')
 
@@ -16,17 +17,19 @@ while True:
     # covert to grayscale
     grayscaled_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    cv2.imshow("box", grayscaled_img)
-    cv2.waitKey(1)
+    # detect the faces
+    face_coordinates = trained_face_data.detectMultiScale(grayscaled_img)
 
-"""
-# detect the faces
-face_coordinates = trained_face_data.detectMultiScale(grayscaled_img)
+    # draws the rectangles
+    for (x, y, w, h) in face_coordinates:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (randrange(256), randrange(256), randrange(256)), 1)
 
-# draws the rectangles
-cv2.rectangle(img, face_coordinates,(randrange(256), randrange(256), randrange(256)), 1)
+    cv2.imshow("box", frame)
+    key = cv2.waitKey(1)
 
-# shows the color image with boxes
-"""
+    if key==81 or key==113:
+        break
+
+webcam.release()
 
 print("Code Completed")
